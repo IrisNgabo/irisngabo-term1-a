@@ -20,7 +20,7 @@ public class MathOperatorServiceTest {
     private MathOperatorImpl mathOperatorService;
 
     @Test
-    public void should_create_math_operation_success() throws InvalidOperationException {
+    public void math_operation() throws InvalidOperationException {
         double operator1 = 4;
         double operator2 = 9;
         String operation = "+";
