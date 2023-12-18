@@ -20,16 +20,51 @@ public class MathOperatorServiceTest {
     private MathOperatorImpl mathOperatorService;
 
     @Test
-    public void math_operation() throws InvalidOperationException {
-        double operator1 = 4;
-        double operator2 = 9;
-        String operation = "+";
+    public void add_operation() throws InvalidOperationException {
+        testMathOperation(4,
+                9, "+");
+    }
 
-        double mathOperation = mathOperatorService.doMath(operator1,operator2, operation);
-        when(mathOperatorService.doMath(operator1, operator2, operation)).thenReturn(mathOperation);
+    @Test
+    public void subtract_operation() throws InvalidOperationException {
+        testMathOperation(9, 4, "-");
+    }
+
+    @Test
+    public void multiply_operation() throws InvalidOperationException {
+        testMathOperation(4, 9, "*");
+    }
+
+    @Test
+    public void divide_operation() throws InvalidOperationException {
+        testMathOperation(9, 3, "/");
+    }
+
+    private void testMathOperation(double operator1, double operator2, String operation)
+            throws InvalidOperationException {
+        double expectedResult = performMathOperation(operator1, operator2, operation);
 
         double actualMathOperator = mathOperatorService.doMath(operator1, operator2, operation);
 
-        assertThat(mathOperation).usingRecursiveComparison().isEqualTo(actualMathOperator);
+        assertThat(expectedResult).isEqualTo(actualMathOperator);
+    }
+
+    private double performMathOperation(double operator1, double operator2, String operation)
+            throws InvalidOperationException {
+        switch (operation) {
+            case "+":
+                return operator1 + operator2;
+            case "-":
+                return operator1 - operator2;
+            case "*":
+                return operator1 * operator2;
+            case "/":
+                if (operator2 == 0) {
+                    throw new InvalidOperationException("Cannot divide by zero");
+                }
+                return operator1 / operator2;
+            default:
+                throw new InvalidOperationException("Invalid operation: " + operation);
+        }
     }
 }
