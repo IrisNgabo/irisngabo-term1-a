@@ -31,6 +31,6 @@ public class MathCalculationEndToEnd {
         String response = restTemplate.postForObject(url, request, String.class);
 
         // Then
-        assertEquals("Expected Response", response);
+        assertEquals("Calc  Response", response);
     }
 }

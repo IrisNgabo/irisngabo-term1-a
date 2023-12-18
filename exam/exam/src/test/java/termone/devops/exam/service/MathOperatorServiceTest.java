@@ -42,11 +42,11 @@ public class MathOperatorServiceTest {
 
     private void testMathOperation(double operator1, double operator2, String operation)
             throws InvalidOperationException {
-        double expectedResult = performMathOperation(operator1, operator2, operation);
+        double calcResponse = performMathOperation(operator1, operator2, operation);
 
         double actualMathOperator = mathOperatorService.doMath(operator1, operator2, operation);
 
-        assertThat(expectedResult).isEqualTo(actualMathOperator);
+        assertThat(calcResponse).isEqualTo(actualMathOperator);
     }
 
     private double performMathOperation(double operator1, double operator2, String operation)
